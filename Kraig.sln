@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kraig.Generators", "Kraig.Generators\Kraig.Generators.csproj", "{1C8CDB93-78D8-3CA7-0FF2-0EE2CE5C47B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kraig.Roslyn", "Kraig.Roslyn\Kraig.Roslyn.csproj", "{1C8CDB93-78D8-3CA7-0FF2-0EE2CE5C47B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kraig.Generators.Samples", "Kraig.Generators.Samples\Kraig.Generators.Samples.csproj", "{78A9B473-371D-4ABF-B5C4-4D0273278F97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kraig.Roslyn.Samples", "Kraig.Roslyn.Samples\Kraig.Roslyn.Samples.csproj", "{78A9B473-371D-4ABF-B5C4-4D0273278F97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

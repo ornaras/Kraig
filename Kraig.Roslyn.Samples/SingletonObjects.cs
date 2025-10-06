@@ -1,6 +1,6 @@
 ﻿using Kraig.Attributes;
 
-namespace Kraig.Generators.Samples.SingletonObjects
+namespace Kraig.Roslyn.Samples.SingletonObjects
 {
     [Singleton]
     public partial class SimpleSingleton

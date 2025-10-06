@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 
-namespace Kraig.Generators
+namespace Kraig.Roslyn.Generators
 {
     [Generator(LanguageNames.CSharp)]
     internal class SingletonGenerator : IIncrementalGenerator
