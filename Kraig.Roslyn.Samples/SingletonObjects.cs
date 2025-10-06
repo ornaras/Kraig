@@ -17,4 +17,24 @@ namespace Kraig.Roslyn.Samples.SingletonObjects
             Id = Guid.NewGuid();
         }
     }
+
+    [Singleton]
+    public partial class SingletonWithPublicConstructor
+    {
+        public Guid Id { get; init; }
+        public SingletonWithPublicConstructor()
+        {
+            Id = Guid.NewGuid();
+        }
+    }
+
+    [Singleton]
+    public partial class SingletonWithParameteredConstructor
+    {
+        public Guid Id { get; init; }
+        private SingletonWithParameteredConstructor(string id)
+        {
+            Id = Guid.Parse(id);
+        }
+    }
 }
