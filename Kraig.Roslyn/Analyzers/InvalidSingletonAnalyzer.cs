@@ -4,17 +4,16 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Locale = Kraig.Roslyn.Locales.Analyzers;
 
 namespace Kraig.Roslyn.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class InvalidSingletonAnalyzer : DiagnosticAnalyzer
 {
-    private const string Title = "Singleton-класс должен иметь только частный конструктор без параметров";
-    private const string MessageFormat = "Класс {0} должен иметь только один конструктор (частный и без параметров)";
-    private const string Description =
-        "Все публичные или конструкторы с параметрами нарушают принцип Singleton и " +
-        "могут позволить создать более одного экземпляра класса.";
+    private static readonly LocalizableString Title = new LocalizableResourceString(nameof(Locale.InvalidSignletonAnalyzerName), Locale.ResourceManager, typeof(Locale));
+    private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(Locale.InvalidSignletonAnalyzerMessageFormat), Locale.ResourceManager, typeof(Locale));
+    private static readonly LocalizableString Description = new LocalizableResourceString(nameof(Locale.InvalidSignletonAnalyzerDescription), Locale.ResourceManager, typeof(Locale));
 
     private static readonly DiagnosticDescriptor Rule = new(
         AnalyzerIds.InvalidSingletonAnalyzer, Title, MessageFormat, "",
