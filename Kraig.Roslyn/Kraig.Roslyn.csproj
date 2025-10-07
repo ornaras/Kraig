@@ -6,6 +6,9 @@
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 		<IsRoslynComponent>true</IsRoslynComponent>
 		<LangVersion>Latest</LangVersion>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>ornaras</Authors>
+		<RepositoryUrl>https://github.com/ornaras/Kraig</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
