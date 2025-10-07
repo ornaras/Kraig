@@ -10,7 +10,10 @@ namespace Kraig.Roslyn
             for(var i = 0; i < value.Length; i++)
             {
                 if (value[i] == '_')
-                    result.Append(char.ToUpper(value[++i]));
+                {
+                    if (++i < value.Length)
+                        result.Append(char.ToUpper(value[i]));
+                }
                 else result.Append(value[i]);
             }
             return result.ToString();
