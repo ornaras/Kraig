@@ -17,7 +17,10 @@ namespace Kraig.Roslyn.Generators
             namespace Kraig.Attributes
             {
                 [AttributeUsage(AttributeTargets.Field)]
-                public class NotifyChangedAttribute : Attribute { }
+                public class NotifyChangedAttribute : Attribute 
+                {
+                    public bool GenerateEvent = false;
+                }
             }
             """;
         private const string CLASS_TEMPLATE = """
@@ -42,7 +45,7 @@ namespace Kraig.Roslyn.Generators
                             if (Equals({2}, value)) 
                                 return;
                             {2} = value;
-                            OnPropertyChanged("{1}");
+                            OnPropertyChanged("{1}");{3}
                         }}
                     }}
             """;
@@ -93,10 +96,20 @@ namespace Kraig.Roslyn.Generators
             var propertiesBuilder = new StringBuilder();
             foreach (var field in fields)
             {
+                var attr = field.GetAttributes().First(a => a.AttributeClass.ToDisplayString() == ATTRIBUTE_FULLNAME)!;
+
+                var argGenerateEvent = attr.NamedArguments.FirstOrDefault(i => i.Key == "GenerateEvent").Value;
+                var generateEvent = !argGenerateEvent.IsNull && (bool)argGenerateEvent.Value;
+
                 var type = field.Type.ToDisplayString();
                 var name = field.Name.ToPascalCase();
-                propertiesBuilder.AppendFormat(PROPERTY_TEMPLATE, type, name, field.Name);
+                var invokeEvent = "";
+                if(generateEvent)
+                    invokeEvent = $"\n\t\t\t\t{name}Changed?.Invoke();";
+                propertiesBuilder.AppendFormat(PROPERTY_TEMPLATE, type, name, field.Name, invokeEvent);
                 propertiesBuilder.AppendLine();
+                if(generateEvent)
+                    propertiesBuilder.AppendLine($"\t\tpublic event Action {name}Changed;");
             }
             var classBuilder = new StringBuilder();
             var className = fields[0].ContainingType.Name;
