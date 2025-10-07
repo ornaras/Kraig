@@ -23,21 +23,21 @@ namespace Kraig.Roslyn.Generators
 
         private const string TEMPLATE = """
             namespace {0}
-            {
+            {{
                 partial class {1}
-                {
+                {{
                     public static {1} Instance
-                    {
+                    {{
                         get
-                        {
+                        {{
                             if(_instance is null) 
                                 _instance = new {1}();
                             return _instance;
-                        }
-                    }
+                        }}
+                    }}
                     private static {1} _instance;{2}
-                }
-            }
+                }}
+            }}
             """;
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -64,8 +64,8 @@ namespace Kraig.Roslyn.Generators
                 var constructor = "";
                 if (NeedAutoConstructor(type))
                     constructor = $"\n\t\tprivate {type.Name}() {{ }}";
-                builder.AppendLine(TEMPLATE.Replace("{0}", ns)
-                    .Replace("{1}", type.Name).Replace("{2}", constructor));
+                builder.AppendFormat(TEMPLATE, ns, type.Name, constructor);
+                builder.AppendLine();
             }
 
             ctx.AddSource("Singletons.g.cs", builder.ToString());
