@@ -1,0 +1,18 @@
+permissions:
+    contents: write
+    packages: write
+    
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-roslyn:
+    runs-on: windows-2022
+    steps:
+    - uses: actions/checkout@v4
+    - run: dotnet build Kraig.Roslyn/Kraig.Roslyn.csproj -p:Version=${{ github.event.release.tag_name }}
+    - run: dotnet nuget add source --username ornaras --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/ornaras/index.json"
+    - run: dotnet nuget push "Kraig.Roslyn\bin\Debug\Kraig.Roslyn.${{ github.event.release.tag_name }}.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
+
+  
