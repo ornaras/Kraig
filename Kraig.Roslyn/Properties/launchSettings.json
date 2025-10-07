@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Kraig.Roslyn": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\Kraig.Roslyn.Samples\\Kraig.Roslyn.Samples.csproj"
+    }
+  }
+}
