@@ -16,7 +16,7 @@ namespace Kraig.Roslyn.Generators
 
             namespace Kraig.Attributes
             {
-                [AttributeUsage(AttributeUsage.Field)]
+                [AttributeUsage(AttributeTargets.Field)]
                 public class NotifyChangedAttribute : Attribute { }
             }
             """;
