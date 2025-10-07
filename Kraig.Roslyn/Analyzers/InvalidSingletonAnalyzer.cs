@@ -11,13 +11,13 @@ namespace Kraig.Roslyn.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class InvalidSingletonAnalyzer : DiagnosticAnalyzer
 {
+    private const string Id = "K001";
     private static readonly LocalizableString Title = new LocalizableResourceString(nameof(Locale.InvalidSignletonAnalyzerName), Locale.ResourceManager, typeof(Locale));
     private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(Locale.InvalidSignletonAnalyzerMessageFormat), Locale.ResourceManager, typeof(Locale));
     private static readonly LocalizableString Description = new LocalizableResourceString(nameof(Locale.InvalidSignletonAnalyzerDescription), Locale.ResourceManager, typeof(Locale));
 
     private static readonly DiagnosticDescriptor Rule = new(
-        AnalyzerIds.InvalidSingletonAnalyzer, Title, MessageFormat, "",
-        DiagnosticSeverity.Error, true, Description);
+        Id, Title, MessageFormat, "", DiagnosticSeverity.Error, true, Description);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
