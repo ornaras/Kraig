@@ -10,6 +10,8 @@
 		<Authors>ornaras</Authors>
 		<RepositoryUrl>https://github.com/ornaras/Kraig</RepositoryUrl>
 		<NeutralLanguage>en</NeutralLanguage>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<ItemGroup>
