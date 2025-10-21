@@ -21,10 +21,28 @@ namespace Kraig.Roslyn.Generators
             }
             """;
 
+        private const string INTERFACE = """
+            #if SINGLETON_INTERFACE
+            using System;
+                                         
+            namespace Kraig 
+            {
+               public interface ISingleton<T>
+                   where T: ISingleton<T>
+               {
+                   abstract static T Instance { get; }
+               }
+            }
+            #endif // SINGLETON_INTERFACE
+            """;
+
         private const string TEMPLATE = """
             namespace {0}
             {{
                 partial class {1}
+            #if SINGLETON_INTERFACE
+                    : Kraig.ISingleton<{1}>
+            #endif
                 {{
                     public static {1} Instance
                     {{
@@ -43,6 +61,7 @@ namespace Kraig.Roslyn.Generators
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             context.RegisterPostInitializationOutput(GenerateAttribute);
+            context.RegisterPostInitializationOutput(GenerateInterface);
             var classes = context.SyntaxProvider.CreateSyntaxProvider(
                 (node, _) => node is ClassDeclarationSyntax,
                 (ctx, _) => (ITypeSymbol)ctx.SemanticModel.GetDeclaredSymbol(ctx.Node));
@@ -51,6 +70,9 @@ namespace Kraig.Roslyn.Generators
 
         private static void GenerateAttribute(IncrementalGeneratorPostInitializationContext context) =>
             context.AddSource("SingletonAttribute.g.cs", ATTRIBUTE_CLASS);
+
+        private static void GenerateInterface(IncrementalGeneratorPostInitializationContext context) =>
+            context.AddSource("ISingleton.g.cs", INTERFACE);
 
         private static void GenerateCode(SourceProductionContext ctx, ImmutableArray<ITypeSymbol> arr)
         {
